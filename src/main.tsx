@@ -33,6 +33,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           }
         }
       }}
+      formFields={{
+        signUp: {
+          gender: {
+            label: 'Gender (male/female)',
+            type: 'text',
+            required: true,
+          },
+        },
+      }}
     >
       <App />
     </Authenticator>
