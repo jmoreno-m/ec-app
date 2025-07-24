@@ -8,4 +8,20 @@ export const auth = defineAuth({
   loginWith: {
     email: true,
   },
+    
+  userAttributes: {
+    preferredUsername: {
+      mutable: true,
+      required: true,
+    },
+    // Maps to Cognito standard attribute 'gender'
+    gender: {
+      mutable: true,
+      required: true,
+    },
+    birthdate: {
+      mutable: true,
+      required: true,
+    },
+  },
 });
