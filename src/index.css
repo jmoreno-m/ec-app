@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+  background: linear-gradient(180deg, rgb(179, 191, 222), rgb(255, 255, 255));
   display: flex;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
@@ -62,4 +62,18 @@ li:hover {
 a {
   font-weight: 800;
   text-decoration: none;
+}
+
+:root,
+.amplify {
+  --amplify-components-button-primary-background-color: rgb(19, 50, 154);
+  --amplify-components-button-primary-hover-background-color: rgb(19, 50, 154);
+  --amplify-components-button-primary-color: #ffffff;
+  --amplify-components-button-border-radius: 8px;
+}   
+
+.amplify {
+  --amplify-components-button-secondary-background-color: #ffffff;
+  --amplify-components-button-secondary-hover-background-color: #f0f0f0;
+  --amplify-components-button-secondary-color: rgb(19, 50, 154);
 }

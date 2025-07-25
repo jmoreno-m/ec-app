@@ -2,14 +2,28 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 
-import { useAuthenticator } from '@aws-amplify/ui-react';
+import { useAuthenticator,
+  Flex,
+  Text,
+  Divider,
+  Menu,
+  MenuItem,
+  View
+ } from '@aws-amplify/ui-react';
+
+import { useUserAttributes } from './useUserAttributes';
 
 const client = generateClient<Schema>();
+
+ 
+
+
 
 function App() {
 
   //const { signOut } = useAuthenticator();
-  const { user, signOut } = useAuthenticator();
+  const { signOut } = useAuthenticator();
+  const { attributes } = useUserAttributes();
 
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
@@ -19,35 +33,49 @@ function App() {
     });
   }, []);
 
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
+
   
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
+
   //<h1>My todos</h1>
   return (
     <main>
-       
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li
-          onClick={() => deleteTodo(todo.id)}
-          key={todo.id}>
-          {todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
-      <button onClick={signOut}>Sign out</button>
+      <Menu
+        position="absolute"
+        top="1rem"
+        left="1rem"      
+      >
+        <MenuItem onClick={() => alert('Download')}>
+          Download
+        </MenuItem>
+        <MenuItem onClick={() => alert('Create a Copy')}>
+          Create a Copy
+        </MenuItem>
+        <MenuItem onClick={() => alert('Mark as Draft')}>
+          Mark as Draft
+        </MenuItem>
+        <Divider />
+        <MenuItem isDisabled onClick={() => alert('Delete')}>
+          Delete
+        </MenuItem>
+        <MenuItem onClick={(signOut) => alert('Sign out')}>
+          Sign out
+        </MenuItem>
+      </Menu>
+      <Flex 
+        position="absolute"
+        top="1rem"
+        right="1rem"
+        direction="row"
+        alignItems="center"
+        gap="0.5rem"
+        >
+        <Text>{attributes?.preferred_username}</Text>
+        <Divider 
+          orientation="vertical" />
+        <button onClick={signOut}>Sign out</button>
+      </Flex>  
+
+      
     </main>
   );
 }
