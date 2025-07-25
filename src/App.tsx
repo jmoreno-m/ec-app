@@ -7,8 +7,7 @@ import { useAuthenticator,
   Text,
   Divider,
   Menu,
-  MenuItem,
-  View
+  MenuItem
  } from '@aws-amplify/ui-react';
 
 import { useUserAttributes } from './useUserAttributes';
@@ -25,13 +24,9 @@ function App() {
   const { signOut } = useAuthenticator();
   const { attributes } = useUserAttributes();
 
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  //const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
+
 
 
   
@@ -57,7 +52,7 @@ function App() {
         <MenuItem isDisabled onClick={() => alert('Delete')}>
           Delete
         </MenuItem>
-        <MenuItem onClick={(signOut) => alert('Sign out')}>
+        <MenuItem onClick={() => alert('Sign out')}>
           Sign out
         </MenuItem>
       </Menu>
